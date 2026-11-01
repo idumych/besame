@@ -113,20 +113,17 @@ Settings::SaveHighScores(const besame::HighScores& table)
 }
 
 
-BPoint
-Settings::LoadWindowPosition()
+bool
+Settings::LoadWindowPosition(BPoint& position)
 {
 	BMessage message;
-	BPoint position;
 	if (LoadMessage(kDirectory, kSettingsFile, message) != B_OK
 		|| message.FindPoint("window position", &position) != B_OK)
-		return kDefaultWindowPosition;
+		return false;
 
 	// keep the window's tab on screen
 	BRect screen = BScreen().Frame();
-	if (!screen.InsetByCopy(20, 20).Contains(position + BPoint(20, 0)))
-		return kDefaultWindowPosition;
-	return position;
+	return screen.InsetByCopy(20, 20).Contains(position + BPoint(20, 0));
 }
 
 

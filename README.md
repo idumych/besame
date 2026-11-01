@@ -29,7 +29,7 @@ pixel for pixel.
 - **Speed:** the game pulses every 0.1 s, as it did on BeOS.
 - **New board every game:** the original never seeded its random numbers, so
   every game started with the same board.
-- **Menus:** a "Game" menu with New game (Alt+N), About BeSame and Quit
+- **Menus:** a "Game" menu with New game (Alt+N), About BeSame… and Quit
   (Alt+Q), in Haiku's style, instead of "Project" with New Game, About and
   Quit without shortcuts. The window is titled "BeSame" instead of "Same
   Game".
@@ -37,7 +37,7 @@ pixel for pixel.
   original's format, instead of next to the program (read-only on Haiku).
   Scores from the old package (`~/config/settings/besame/`) are picked up on
   the first start. They are saved as soon as a name is entered.
-- **Window position** is remembered.
+- **Window position:** centred on the first start, then remembered.
 - **Name entry:** "Please enter your name:" ran off the window in today's
   fonts; it's shrunk to fit. Only printable characters are taken (UTF-8
   too), and Backspace on an empty name no longer writes outside the name.

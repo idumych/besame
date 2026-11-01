@@ -20,7 +20,8 @@ namespace Settings {
 void LoadHighScores(besame::HighScores& table);
 status_t SaveHighScores(const besame::HighScores& table);
 
-BPoint LoadWindowPosition();
+// false when there's no saved position, or it's off screen
+bool LoadWindowPosition(BPoint& position);
 void SaveWindowPosition(BPoint position);
 
 }

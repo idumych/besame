@@ -38,7 +38,7 @@ MainWindow::MainWindow()
 	game->AddItem(new BMenuItem(B_TRANSLATE("New game"),
 		new BMessage(kMsgNewGame), 'N'));
 	game->AddSeparatorItem();
-	BMenuItem* about = new BMenuItem(B_TRANSLATE("About BeSame"),
+	BMenuItem* about = new BMenuItem(B_TRANSLATE("About BeSame" B_UTF8_ELLIPSIS),
 		new BMessage(B_ABOUT_REQUESTED));
 	about->SetTarget(be_app);
 	game->AddItem(about);
@@ -59,7 +59,11 @@ MainWindow::MainWindow()
 	_Show(new TitleView(_FieldFrame(), fHighScores));
 
 	ResizeToPreferred();
-	MoveTo(Settings::LoadWindowPosition());
+	BPoint position;
+	if (Settings::LoadWindowPosition(position))
+		MoveTo(position);
+	else
+		CenterOnScreen();
 }
 
 

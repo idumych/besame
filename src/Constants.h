@@ -15,7 +15,6 @@
 // four 480 x 337 views shown one at a time.
 static const float kFieldWidth = 480;
 static const float kFieldHeight = 337;
-static const BPoint kDefaultWindowPosition(100, 100);
 
 // The original asked for a pulse every 50 microseconds. BeOS delivered
 // pulses in steps of 0.1 s; Haiku honours the rate, which makes the original
