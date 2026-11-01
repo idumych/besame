@@ -33,7 +33,7 @@ public:
 	virtual void AboutRequested()
 	{
 		BAlert* alert = new BAlert(B_TRANSLATE("About BeSame"),
-			B_TRANSLATE("BeSame 1.1\n\n"
+			B_TRANSLATE("BeSame 1.1.1\n\n"
 				"BeSame 1.0 for BeOS by Michael Wulff Nielsen "
 				"(Naish@get2net.dk).\n"
 				"www.wulffnet.dk/Beos\n\n"

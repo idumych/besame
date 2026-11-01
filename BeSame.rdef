@@ -11,13 +11,13 @@ resource app_flags B_SINGLE_LAUNCH;
 resource app_version {
 	major  = 1,
 	middle = 1,
-	minor  = 0,
+	minor  = 1,
 
 	variety = B_APPV_FINAL,
 	internal = 0,
 
 	short_info = "BeSame",
-	long_info = "BeSame 1.1.0 ©1999 Michael Wulff Nielsen; native Haiku port 2026"
+	long_info = "BeSame 1.1.1 ©1999 Michael Wulff Nielsen; native Haiku port 2026"
 };
 
 // The icon from Michel Clasquin-Johnson's Haiku package of the original

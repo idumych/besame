@@ -48,6 +48,9 @@ pixel for pixel.
 ## What's different from the original
 
 - **Speed:** the game pulses every 0.1 s, as it did on BeOS.
+- **End of a game:** the board that's left stays on screen for 2 s before
+  "Game over", so you can see how many balls remain; the original switched
+  straight away.
 - **New board every game:** the original never seeded its random numbers, so
   every game started with the same board.
 - **Menus:** a "Game" menu with New game (Alt+N), About BeSame… and Quit
