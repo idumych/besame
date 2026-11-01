@@ -33,6 +33,7 @@ private:
 	bool					fPointerInside;
 	int						fHoverColumn;
 	int						fHoverRow;
+	int32					fGameOverPulses;	// -1 while playing
 };
 
 #endif // PLAY_VIEW_H

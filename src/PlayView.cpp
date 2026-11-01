@@ -25,6 +25,8 @@ using besame::Board;
 static const float kBallSize = 32;
 static const float kScoreTop = Board::kRows * kBallSize;	// 320
 static const BPoint kScorePosition(10, 330);
+// The last board stays up this long (2 s) before "Game over"
+static const int32 kGameOverPulses = 20;
 
 
 PlayView::PlayView(BRect frame, uint32 seed)
@@ -33,7 +35,8 @@ PlayView::PlayView(BRect frame, uint32 seed)
 	fBalls(LoadArt("balls")),
 	fPointerInside(false),
 	fHoverColumn(-1),
-	fHoverRow(-1)
+	fHoverRow(-1),
+	fGameOverPulses(-1)
 {
 	SetViewColor(B_TRANSPARENT_COLOR);
 	fBoard.Deal(seed);
@@ -81,7 +84,8 @@ void
 PlayView::MouseDown(BPoint where)
 {
 	int column, row;
-	if (!_CellAt(where, column, row) || fBoard.SelectionCount() < 2)
+	if (fGameOverPulses >= 0 || !_CellAt(where, column, row)
+		|| fBoard.SelectionCount() < 2)
 		return;
 
 	fBoard.RemoveSelection();
@@ -90,11 +94,9 @@ PlayView::MouseDown(BPoint where)
 	fHoverRow = row;
 	Invalidate();
 
-	if (fBoard.IsGameOver()) {
-		BMessage message(kMsgGameOver);
-		message.AddInt32("score", fBoard.Score());
-		Window()->PostMessage(&message);
-	}
+	// Leave the balls that are left on screen for a moment; Pulse() moves on
+	if (fBoard.IsGameOver())
+		fGameOverPulses = 0;
 }
 
 
@@ -103,6 +105,9 @@ PlayView::MouseDown(BPoint where)
 void
 PlayView::MouseMoved(BPoint where, uint32 transit, const BMessage* dragMessage)
 {
+	if (fGameOverPulses >= 0)
+		return;
+
 	int column = -1, row = -1;
 	fPointerInside = transit != B_EXITED_VIEW && transit != B_OUTSIDE_VIEW
 		&& _CellAt(where, column, row);
@@ -119,6 +124,15 @@ PlayView::MouseMoved(BPoint where, uint32 transit, const BMessage* dragMessage)
 void
 PlayView::Pulse()
 {
+	if (fGameOverPulses >= 0) {
+		if (++fGameOverPulses == kGameOverPulses) {
+			BMessage message(kMsgGameOver);
+			message.AddInt32("score", fBoard.Score());
+			Window()->PostMessage(&message);
+		}
+		return;
+	}
+
 	// The clock only runs while the window is active
 	if (!Window()->IsActive())
 		return;
