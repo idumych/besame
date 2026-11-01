@@ -10,6 +10,27 @@ clock takes 10 points off every half second while the window is active, so
 be quick. The game ends when no two neighbouring balls share a colour; the
 five best scores are kept.
 
+## Screenshots
+
+![BeSame on Haiku R1/beta6, a game in progress](docs/screenshots/haiku-play.png)
+
+A game in progress on Haiku R1/beta6.
+
+![BeSame on Linux under Wayland, the high scores on the title screen](docs/screenshots/linux-title.png)
+
+The title screen's high scores on Linux (Wayland, Hokku).
+
+## Platforms
+
+| Platform | Package | Tested |
+|---|---|---|
+| Haiku R1/beta6, Renku OS (x86_64) | `.hpkg` | played on Haiku R1/beta6 and Renku |
+| Haiku (arm64) | `.hpkg` | on a Haiku arm64 nightly in QEMU |
+| Linux (x86_64, aarch64) | AppImage | started under X11 and Wayland in CI; x86_64 played under Xvfb |
+
+The original's gcc2 binary still needs a 32-bit gcc2-hybrid system; this
+port doesn't.
+
 ## Why a port
 
 The only Haiku package of BeSame (Michel Clasquin-Johnson's

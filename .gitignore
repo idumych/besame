@@ -5,3 +5,4 @@
 *.AppImage
 /.cosmoe/
 /.haiku-headers/
+/.haiku-arm64/
