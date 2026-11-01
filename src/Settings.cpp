@@ -4,16 +4,18 @@
  */
 #include "Settings.h"
 
+#include <Application.h>
 #include <Bitmap.h>
 #include <Directory.h>
 #include <File.h>
 #include <FindDirectory.h>
 #include <Message.h>
 #include <Path.h>
+#include <Resources.h>
 #include <Screen.h>
-#include <TranslationUtils.h>
 
 #include <cstdio>
+#include <cstring>
 
 #include "Constants.h"
 
@@ -136,11 +138,35 @@ Settings::SaveWindowPosition(BPoint position)
 }
 
 
+// The pictures are raw B_RGBA32 pixels (tools/png2raw.py) rather than PNGs:
+// not every Haiku has a PNG translator (the arm64 nightlies have none).
 BBitmap*
 LoadArt(const char* name)
 {
-	BBitmap* bitmap = BTranslationUtils::GetBitmap('PNG ', name);
-	if (bitmap == NULL)
+	size_t size = 0;
+	const uint8* data = NULL;
+	BResources* resources = BApplication::AppResources();
+	if (resources != NULL)
+		data = (const uint8*)resources->LoadResource('BSRW', name, &size);
+
+	uint32 width = 0, height = 0;
+	if (data != NULL && size >= 12 && memcmp(data, "BSRW", 4) == 0) {
+		width = data[4] | data[5] << 8 | data[6] << 16 | (uint32)data[7] << 24;
+		height = data[8] | data[9] << 8 | data[10] << 16 | (uint32)data[11] << 24;
+	}
+	if (width == 0 || height == 0 || width > 4096 || height > 4096
+		|| size < 12 + (size_t)width * height * 4) {
 		fprintf(stderr, "BeSame: can't load the picture \"%s\"\n", name);
+		return NULL;
+	}
+
+	BBitmap* bitmap = new BBitmap(BRect(0, 0, width - 1, height - 1), B_RGBA32);
+	if (bitmap->InitCheck() != B_OK) {
+		delete bitmap;
+		return NULL;
+	}
+	uint8* bits = (uint8*)bitmap->Bits();
+	for (uint32 y = 0; y < height; y++)
+		memcpy(bits + y * bitmap->BytesPerRow(), data + 12 + y * width * 4, width * 4);
 	return bitmap;
 }

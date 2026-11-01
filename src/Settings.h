@@ -26,7 +26,7 @@ void SaveWindowPosition(BPoint position);
 
 }
 
-// One of the original's pictures, from the app's resources ('PNG ' by name).
+// One of the original's pictures, from the app's resources ('BSRW' by name).
 BBitmap* LoadArt(const char* name);
 
 #endif // SETTINGS_H

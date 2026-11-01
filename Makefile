@@ -32,7 +32,7 @@ INCLUDES := src src/core
 # An app that uses B_TRANSLATE needs -llocalestub (Haiku and Hokku both ship it).
 APP_LIBS := -llocalestub
 # Files the .rdef imports (icons, PNG resources), so changing one rebuilds
-RSRC_DEPS := art/balls.png art/logo.png art/gameover.png art/BeSame.hvif
+RSRC_DEPS := art/balls.raw art/logo.raw art/gameover.raw art/BeSame.hvif
 
 override CXXFLAGS += $(addprefix -I,$(INCLUDES))
 

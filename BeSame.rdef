@@ -24,7 +24,8 @@ resource app_version {
 resource vector_icon import "art/BeSame.hvif";
 
 // The original's pictures: balls (a row per colour, a column per frame),
-// the title logo and the game-over banner
-resource(1, "balls") #'PNG ' import "art/balls.png";
-resource(2, "logo") #'PNG ' import "art/logo.png";
-resource(3, "gameover") #'PNG ' import "art/gameover.png";
+// the title logo and the game-over banner. Raw pixels made from the PNGs by
+// tools/png2raw.py, so no translator is needed.
+resource(1, "balls") #'BSRW' import "art/balls.raw";
+resource(2, "logo") #'BSRW' import "art/logo.raw";
+resource(3, "gameover") #'BSRW' import "art/gameover.raw";
