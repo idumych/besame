@@ -1,0 +1,3 @@
+The object of the game is to remove all the balls from the board. Point at a ball and its group of neighbours of the same colour starts spinning; click to remove the group. The balls above fall down and empty columns close up. Every ball is worth 100 points, but the clock takes 10 points off every half second, so be quick.
+
+A native Haiku port of BeSame 1.0 for BeOS by Michael Wulff Nielsen, with its original graphics by Michael Wulff Nielsen and Jeppe Isaaksen.

@@ -1,0 +1,7 @@
+/BeSame
+/obj/
+/dist/
+*.hpkg
+*.AppImage
+/.cosmoe/
+/.haiku-headers/
